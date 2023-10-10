@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <!-- <script src="https://use.fontawesome.com/3c538cc85f.js"></script> -->
+</head>
+<body>
+  <h3>Stop Watch</h3>
+  <div class="timeBox">
+    <h1><span value="" id="mnInp">00</span> : <span value="" id="scInp">00</span></h1>
+    <button onclick="startPause(1)">Start</button>
+    <button onclick="startPause(2)">Pause</button>
+    <h3>Count Down</h3>
+    <input type="number" id="hrCountInp" placeholder="Hour" style="height: 50px; width: 80px;" value="0">
+    <input type="number" id="mnCountInp" placeholder="" style="height: 50px; width: 80px;" value="0">
+      <input type="number" id="scCountInp" placeholder=""  style="height: 50px; width: 80px;" value="0">
+  </div>
+  <button onclick="countStart(1)">Start Count Down</button>
+  <button onclick="countStart(2)">Pause Count Down</button>
+  <script>
+    // let hr = mnInp.value;
+    // let sc = scInp.value;
+    var myControl2;
+    function countStart (key){
+      if(key == 1){
+        // mnInp.style.fontSize = "25px"
+        // scInp.style.fontSize = "25px"
+        // if(scCountInp.value == 0){
+
+        // }
+        if(hrCountInp.value == '' && mnCountInp.value == '' && scCountInp.value == ''){
+            clearInterval(myControl2)
+            alert("Input your desire time")
+            }else if(hrCountInp.value < 0 || mnCountInp.value < 0 || scCountInp.value < 0){
+              alert("Input good input")
+              hrCountInp.value = 0 
+              mnCountInp.value = 0
+              scCountInp.value = 0
+            }
+            else{
+              myControl2 = setInterval(function(){
+                if(hrCountInp.value == 0 && mnCountInp.value == 0 && scCountInp.value == 0){
+                  clearInterval(myControl2)
+                  scCountInp.value ++
+                  alert("input better figure")
+                } 
+                if(mnCountInp.value >= 1 && hrCountInp.value >= 1 && scCountInp.value == 0){
+                  // scCountInp.value -=1
+                  mnCountInp.value --
+                  scCountInp.value = 60
+                }else if(scCountInp.value == 0){
+                    // scCountInp.value -=1
+                    if(mnCountInp.value >= 1){
+                      mnCountInp.value --
+                      scCountInp.value = 60
+                    }else if(mnCountInp.value == 0 && hrCountInp.value >= 1 && scCountInp.value == 0){
+                      hrCountInp.value --
+                      mnCountInp.value = 59
+                      scCountInp.value = 60
+                    }
+                  }
+                  scCountInp.value --
+              }, 1000)
+
+            }
+      }else if(key == 2){
+        clearInterval(myControl2)
+
+      }
+    }
+    var myControl;
+    function startPause (key){
+      if(key == 1){
+        // mnInp.style.fontSize = "25px"
+        // scInp.style.fontSize = "25px"
+        // scInp.innerHTML = 0
+        myControl = setInterval(function(){
+          scInp.innerHTML ++
+          if(scInp.innerHTML == 59){
+            mnInp.innerHTML ++
+            scInp.innerHTML = 0
+            // if(scInp.innerHTML == 0){
+            //   scInp.innerHTML = 59
+            // }
+          }
+        }, 1000)
+        // alert("key One")
+      }else if(key == 2){
+        // alert("key Two")
+        clearInterval(myControl)
+
+      }
+    }
+  </script>
+</body>
+</html>
